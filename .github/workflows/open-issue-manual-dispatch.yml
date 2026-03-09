@@ -15,7 +15,7 @@ jobs:
     steps:
       - run: |
           gh issue --repo ${{ github.repository }} \
-            create --title "Issue from job id ${{ github.job }}" --body \ 
-            "${{ github.actor }} triggered the creation of this issue. GitHub bot created it for him."
+            create --title "Issue from job id ${{ github.job }}" \
+            "--body ${{ github.actor }} triggered the creation of this issue. GitHub bot created it for him."
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
