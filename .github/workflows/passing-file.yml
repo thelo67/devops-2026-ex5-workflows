@@ -1,0 +1,31 @@
+name: Pass a file between jobs
+
+on: workflow_dispatch
+
+jobs:
+
+  save-file-as-artifact:
+  
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Create a file
+        run: echo "File contents from job 1" > from-another-job.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: shared-file
+          path: from-another-job.txt
+
+  job2:
+    needs: save-file-as-artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: shared-file
+
+      - name: Use the file
+        run: cat from-another-job.txt
