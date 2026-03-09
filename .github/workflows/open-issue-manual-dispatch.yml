@@ -1,3 +1,5 @@
+# Using GITHUB_TOKEN
+
 name: Open a new issue
 
 on: workflow_dispatch
